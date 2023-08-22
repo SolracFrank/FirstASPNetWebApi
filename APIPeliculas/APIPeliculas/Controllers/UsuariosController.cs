@@ -52,7 +52,7 @@ namespace APIPeliculas.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult GetUsuario(int usuarioId)
+        public IActionResult GetUsuario(string usuarioId)
         {
             var itemUsuario = _usRepo.GetUsuario(usuarioId);
             if (itemUsuario == null)

@@ -10,7 +10,7 @@ namespace APIPeliculas.Repositorio.IRepositorio
         bool isUniqueUser(string nombre);
         Task<UsuarioLoginRespuestaDto> Login(UsuarioLoginDto usuarioLoginDto);
         //Task<Usuario> Registro(UsuarioRegistroDto usuarioRegistroDto);
-        Task<Usuario> Registro(UsuarioRegistroDto usuarioRegistroDto);
+        Task<UsuarioDatosDto> Registro(UsuarioRegistroDto usuarioRegistroDto);
 
         bool Guardar();
 

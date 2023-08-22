@@ -99,21 +99,39 @@ namespace APIPeliculas.Repositorio
 
         }
 
-        public async Task<Usuario> Registro(UsuarioRegistroDto usuarioRegistroDto)
+        public async Task<UsuarioDatosDto> Registro(UsuarioRegistroDto usuarioRegistroDto)
         {
-            var passwordEncriptado = Obtenermd5(usuarioRegistroDto.Password);
-            usuarioRegistroDto.Password = passwordEncriptado;
-            Usuario usuario = new Usuario()
+            AppUsuario usuario = new AppUsuario()
             {
-                NombreUsuario = usuarioRegistroDto.NombreUsuario,
-                Password = usuarioRegistroDto.Password,
-                Nombre = usuarioRegistroDto.Nombre,
-                Role = usuarioRegistroDto.Role
+                UserName = usuarioRegistroDto.NombreUsuario,
+                Email = usuarioRegistroDto.NombreUsuario,
+                NormalizedEmail = usuarioRegistroDto.NombreUsuario.ToUpper(),
+                Nombre = usuarioRegistroDto.Nombre
+                
             };
-            _bd.Add(usuario);
-            await _bd.SaveChangesAsync();
-           
-            return usuario;
+            var result = await _userManager.CreateAsync(usuario, usuarioRegistroDto.Password);
+            if(result.Succeeded)
+            {
+                //Solo la primera vez para crear los roles
+                if (!_roleManager.RoleExistsAsync("admin").GetAwaiter().GetResult())
+                {
+                    await _roleManager.CreateAsync(new IdentityRole("admin"));
+                    await _roleManager.CreateAsync(new IdentityRole("registrado"));
+                }
+                await _userManager.AddToRoleAsync(usuario, "admin");
+                var usuarioRetornado = _bd.appUsuarios.FirstOrDefault(u =>
+                u.UserName == usuarioRegistroDto.NombreUsuario);
+                //opcion 1
+                //return new UsuarioDatosDto()
+                //{
+                //    Id = usuarioRetornado.Id,
+                //    UserName = usuarioRetornado.UserName,
+                //    Nombre = usuarioRetornado.Nombre
+                //};
+                //opcion 2
+                return _mapper.Map<UsuarioDatosDto>(usuarioRetornado);
+            }
+            return new UsuarioDatosDto();
         }
 
         //Encriptas método
