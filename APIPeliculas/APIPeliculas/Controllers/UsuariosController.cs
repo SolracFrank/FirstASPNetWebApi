@@ -46,7 +46,7 @@ namespace APIPeliculas.Controllers
         }
         //End Point para usuario por ID
         [Authorize(Roles = "admin")]
-        [HttpGet("{usuarioId:int}", Name = "GetUsuario")]
+        [HttpGet("{usuarioId}", Name = "GetUsuario")]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status200OK)]

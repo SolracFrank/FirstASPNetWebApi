@@ -135,19 +135,19 @@ namespace APIPeliculas.Repositorio
         }
 
         //Encriptas método
-        public static string Obtenermd5(string password)
-        {
-            MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
-            byte[] data = System.Text.Encoding.UTF8.GetBytes(password);
-            data = md5.ComputeHash(data);
+        //public static string Obtenermd5(string password)
+        //{
+        //    MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
+        //    byte[] data = System.Text.Encoding.UTF8.GetBytes(password);
+        //    data = md5.ComputeHash(data);
 
-            string resp = "";
-            for (int i = 0; i < data.Length; i++)
-            {
-                resp += data[i].ToString("x2").ToLower();
-            }
+        //    string resp = "";
+        //    for (int i = 0; i < data.Length; i++)
+        //    {
+        //        resp += data[i].ToString("x2").ToLower();
+        //    }
 
-            return resp;
-        }
+        //    return resp;
+        //}
     }
 }
