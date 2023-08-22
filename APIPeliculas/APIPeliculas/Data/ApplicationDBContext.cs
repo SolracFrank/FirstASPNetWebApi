@@ -6,10 +6,10 @@ namespace APIPeliculas.Data
 {
     public class ApplicationDBContext : IdentityDbContext<AppUsuario>
     {
-        public ApplicationDBContext(DbContextOptions<ApplicationDBContext> options) :base(options)
+        public ApplicationDBContext(DbContextOptions<ApplicationDBContext> options) : base(options)
         {
-               
-           
+
+
         }
         protected override void OnModelCreating(ModelBuilder builder)
         {

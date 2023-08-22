@@ -73,6 +73,7 @@ builder.Services.AddDbContext<ApplicationDBContext>(options =>
 //Soporte para autenticación con .NET Identity
 //builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDBContext>; 
 builder.Services.AddIdentity<IdentityUser,IdentityRole>().AddEntityFrameworkStores<ApplicationDBContext>();
+
 //Añadir Cache
 builder.Services.AddResponseCaching();
 
